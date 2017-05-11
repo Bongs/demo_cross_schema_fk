@@ -16,27 +16,27 @@ ActiveRecord::Schema.define(version: 20170511202705) do
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "state_id"
-    t.string   "subdomain"
+    t.string "name"
+    t.integer "state_id"
+    t.string "subdomain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "parties", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "state_id"
+    t.string "name"
+    t.integer "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "states", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code",       limit: 2
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.string "name"
+    t.string "code", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "companies", "states"
-  add_foreign_key "parties", "states"
+  add_foreign_key "companies", "public.states", column: "state_id"
+  add_foreign_key "parties", "public.states", column: "state_id"
 end
